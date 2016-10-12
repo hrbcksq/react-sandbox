@@ -23,7 +23,9 @@ var Greeter = React.createClass({
 	}
 });
 
-ReactDOM.render(
-	<Greeter/>,
-	document.getElementById('app')
-)
+
+// ReactDOM.render(
+// 	<Greeter/>,
+// 	document.getElementById('app')
+// )
+

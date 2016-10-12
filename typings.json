@@ -1,0 +1,7 @@
+{
+  "name": "react-sandbox",
+  "dependencies": {},
+  "globalDevDependencies": {
+    "react": "registry:dt/react#0.14.0+20161008064207"
+  }
+}

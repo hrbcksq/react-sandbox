@@ -1,4 +1,4 @@
-//Presentation component
+//Presentation component(only presentation)
 var GreeterHeader = React.createClass({
 	getDefaultProps: function() {
 		return {
@@ -18,27 +18,36 @@ var GreeterHeader = React.createClass({
 	}
 });
 
-//Response component
+//Response component (haven't state)
 var GreeterForm = React.createClass({
 	changeName: function(event) {
 		event.preventDefault();
-		var name = this.refs.name.value;
-		if (typeof name === 'string' && name.length > 0){
-			this.refs.name.value = '';
-			this.props.changeName(name);
+
+		var updateData = {
+			name : this.refs.name.value,
+			message : this.refs.message.value
 		}
+
+		if ((typeof updateData.name === 'string' && updateData.name.length > 0) 
+			|| (typeof updateData.message === 'string' && updateData.message.length > 0))
+		{
+			this.refs.name.value = '';
+			this.refs.message.value = '';
+			this.props.update(updateData);	
+		}		
 	},
 	render: function() {
 		return (
 			<form onSubmit={this.changeName}>
-				<input type="text" ref='name'/>
+				<input type="text" ref='name' placeholder='Enter name'/>
+				<textarea cols="20" rows="10" ref='message' placeholder='Enter message'></textarea>
 				<button>Update Name</button>
 			</form>
 		);
 	}
 });
 
-//Container component (it maintains state and render children)
+//Container component (it maintains state of applicaton and if state updates it renders children)
 var Greeter = React.createClass({
 	getInitialState: function() {
 		return {
@@ -46,21 +55,23 @@ var Greeter = React.createClass({
 			message: this.props.message 
 		};
 	},
-	updateName: function(name) {
+	updateData: function(data) {
 		this.setState({
-			name: name
+			name: data.name || this.state.name,
+			message: data.message || this.state.message
 		});
 	},
 	render: function() {
 		return (
 			<div>
 				<GreeterHeader name={this.state.name} message={this.state.message}/>
-				<GreeterForm changeName={this.updateName}/>
+				<GreeterForm update={this.updateData}/>
 			</div>			
 		);
 	}
 });
 
+//Entry point
 ReactDOM.render(
 	<Greeter/>,
 	document.getElementById('app')

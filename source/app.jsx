@@ -42,8 +42,12 @@ var GreeterForm = React.createClass({
 	render: function() {
 		return (
 			<form onSubmit={this.changeName}>
-				<input type="text" ref='name' placeholder='Enter name'/>
-				<textarea cols="20" rows="10" ref='message' placeholder='Enter message'></textarea>
+				<div>
+					<input type="text" ref='name' placeholder='Enter name'/>
+				</div>
+				<div>
+					<textarea cols="20" rows="5" ref='message' placeholder='Enter message'></textarea>
+				</div>				
 				<button>Update Name</button>
 			</form>
 		);

@@ -23,18 +23,21 @@ var GreeterForm = React.createClass({
 	changeName: function(event) {
 		event.preventDefault();
 
-		var updateData = {
-			name : this.refs.name.value,
-			message : this.refs.message.value
+		var updateData = {};
+
+		var name = this.refs.name.value;
+		var message = this.refs.message.value; 
+
+		if (name.length > 0) {
+			updateData.name = name;
+			this.refs.name.value = '';
+		} 
+		if (message.length > 0) {
+			updateData.message = message;
+			this.refs.message.value = '';
 		}
 
-		if ((typeof updateData.name === 'string' && updateData.name.length > 0) 
-			|| (typeof updateData.message === 'string' && updateData.message.length > 0))
-		{
-			this.refs.name.value = '';
-			this.refs.message.value = '';
-			this.props.update(updateData);	
-		}		
+		this.props.update(updateData);		
 	},
 	render: function() {
 		return (
@@ -56,10 +59,8 @@ var Greeter = React.createClass({
 		};
 	},
 	updateData: function(data) {
-		this.setState({
-			name: data.name || this.state.name,
-			message: data.message || this.state.message
-		});
+		// It will update only explisit changed data
+		this.setState(data);
 	},
 	render: function() {
 		return (

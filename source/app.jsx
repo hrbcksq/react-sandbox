@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Greeter = require('./components/greeter');
+var Greeter = require('Greeter');
 
 //Entry point
 ReactDOM.render(

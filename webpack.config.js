@@ -3,9 +3,15 @@ module.exports = {
     output: {
         path: './source/',
         filename: 'bundle.js'
-    },
+    },    
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        root: __dirname,
+        alias: {
+            Greeter: 'source/components/greeter.jsx',
+            GreeterForm: 'source/components/greeterForm.jsx',
+            GreeterHeader: 'source/components/greeterHeader.jsx'
+        }
     },
     module: {
         loaders: [
